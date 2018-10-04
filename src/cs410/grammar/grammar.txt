@@ -1,0 +1,12 @@
+PROGRAM     := SHAPEDEC*
+SHAPEDEC    := SHAPE PROPERTY*
+PROPERTY    := POSITION | WIDTH | HEIGHT | RADIUS | TO | FROM | COLOR
+POSITION    := "pos:" VALUE, VALUE
+WIDTH       := "width:" VALUE
+HEIGHT      := "height:" VALUE
+RADIUS      := "radius:" VALUE
+TO          := "to:" VALUE, VALUE
+FROM        := "from:" VALUE, VALUE
+COLOR       := "color:" COLOR_VAL
+COLOR_VAL   := /X11 color name/
+VALUE       := 0-9+
