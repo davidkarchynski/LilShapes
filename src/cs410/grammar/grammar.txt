@@ -9,4 +9,4 @@ TO          := "to:" VALUE, VALUE
 FROM        := "from:" VALUE, VALUE
 COLOR       := "color:" COLOR_VAL
 COLOR_VAL   := /X11 color name/
-VALUE       := 0-9+
+VALUE       := \d+(?:\.\d+)?
