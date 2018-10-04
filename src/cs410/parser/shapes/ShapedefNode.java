@@ -6,14 +6,15 @@ import cs410.parser.properties.PropertyNode;
 
 import java.util.*;
 
-public abstract class ShapedecNode extends Node {
+public abstract class ShapedefNode extends Node {
+    protected String name;
 
     // Override in subclass
-    private Set<String> supportedProps = new HashSet<>();
+    protected Set<String> supportedProps = new HashSet<>();
 
     public Map<String, PropertyNode> properties;
 
-    public ShapedecNode() {
+    public ShapedefNode() {
         this.properties = new HashMap<>();
     }
 
@@ -28,7 +29,12 @@ public abstract class ShapedecNode extends Node {
     }
 
     private PropertyNode propNodeFromToken(String token) {
-        // stub
+        if (!this.supportedProps.contains(token)) {
+            System.out.println("Unsupported property "
+                    + token.replace(":", "")
+                    + " for shape " + this.name);
+        }
+        // TODO: switch on token parameter and return the correct implementation
         return null;
     }
 }
