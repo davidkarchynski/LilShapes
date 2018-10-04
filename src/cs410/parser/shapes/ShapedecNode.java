@@ -4,18 +4,17 @@ import cs410.parser.Node;
 import cs410.parser.Parser;
 import cs410.parser.properties.PropertyNode;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public abstract class ShapedecNode extends Node {
 
+    // Override in subclass
     private Set<String> supportedProps = new HashSet<>();
 
-    public ArrayList<PropertyNode> properties;
+    public Map<String, PropertyNode> properties;
 
     public ShapedecNode() {
-        this.properties = new ArrayList<PropertyNode>();
+        this.properties = new HashMap<>();
     }
 
     @Override
@@ -24,9 +23,8 @@ public abstract class ShapedecNode extends Node {
         while (!Parser.supportedShapes.contains(nextToken)) {
             PropertyNode prop = propNodeFromToken(lexer.getNext());
             prop.parse();
-            this.properties.add(prop);
+            this.properties.put(prop.name, prop);
         }
-
     }
 
     private PropertyNode propNodeFromToken(String token) {
