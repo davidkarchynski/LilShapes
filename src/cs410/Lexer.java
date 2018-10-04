@@ -28,13 +28,8 @@ public class Lexer {
             input = input.replace(literal,"_"+literal+"_");
         }
 
-        System.out.println(input);
-
-
-        System.out.println(input);
         input = input.replace(" ","");
         input = input.replace(",","");
-        System.out.println(input);
         input = input.replaceAll("__","_");
 
         this.tokens = new ArrayList<>(Arrays.asList(input.split("_")));
@@ -80,7 +75,8 @@ public class Lexer {
 
     public String getNext(String regexp) {
         if (!checkToken(regexp)) {
-            System.exit(0);
+            System.out.println("Failed to parse at token: " + this.peek());
+            System.exit(1);
         }
         return this.getNext();
     }
