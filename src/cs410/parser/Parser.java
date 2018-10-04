@@ -1,4 +1,6 @@
-package cs410;
+package cs410.parser;
+
+import cs410.Lexer;
 
 public class Parser {
     private Lexer lexer;
@@ -8,6 +10,12 @@ public class Parser {
     }
 
     public void parse() {
-        
+        while (!lexer.empty()) {
+            String nextToken = lexer.peek();
+            switch (nextToken) {
+                case "circle":
+                case "":
+            }
+        }
     }
 }

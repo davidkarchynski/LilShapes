@@ -1,4 +1,4 @@
 package cs410.parser;
 
-public class PropertyNode {
+public abstract class PropertyNode extends Node {
 }
