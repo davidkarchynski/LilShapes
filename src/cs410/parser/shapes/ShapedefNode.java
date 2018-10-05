@@ -3,7 +3,7 @@ package cs410.parser.shapes;
 import cs410.Lexer;
 import cs410.parser.Node;
 import cs410.parser.Parser;
-import cs410.parser.properties.PropertyNode;
+import cs410.parser.properties.*;
 
 import java.util.*;
 
@@ -22,7 +22,13 @@ public abstract class ShapedefNode extends Node {
     @Override
     public void parse() {
         while (!Parser.supportedShapes.contains(lexer.peek())) {
-            PropertyNode prop = propNodeFromToken(lexer.getNext());
+            String token = lexer.getNext();
+
+            if (token.equals(Lexer.NULL_TOKEN)) {
+                break;
+            }
+
+            PropertyNode prop = propNodeFromToken(token);
             prop.parse();
             this.properties.put(prop.name(), prop);
         }
@@ -34,7 +40,20 @@ public abstract class ShapedefNode extends Node {
                     + token.replace(":", "")
                     + " for shape " + this.name());
         }
-        // TODO: switch on token parameter and return the correct implementation
+
+        switch (token) {
+            case ColorProp.TOKEN_NAME:
+                return new ColorProp(lexer);
+            case WidthProp.TOKEN_NAME:
+                return new WidthProp(lexer);
+            case HeightProp.TOKEN_NAME:
+                return new HeightProp(lexer);
+            case PositionProp.TOKEN_NAME:
+                return new PositionProp(lexer);
+            default:
+                System.out.println("Could not parse property: " + token);
+                System.exit(1);
+        }
         return null;
     }
 

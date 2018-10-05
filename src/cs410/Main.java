@@ -15,7 +15,7 @@ public class Main {
         lexer.tokenize("files/input.lils", "files/literals.txt");
         lexer.printTokens();
 
-        Parser parser = new Parser(lexer);
+        Parser parser = new Parser(lexer, "files/html_template.html", "files/output.html");
         parser.parse();
     }
 }

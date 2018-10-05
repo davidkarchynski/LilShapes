@@ -39,14 +39,14 @@ public class RectShapedef extends ShapedefNode {
 
         sb.append("<rect ").append(pos.evaluate())
                 .append(" ")
-                .append(width)
+                .append(width.evaluate())
                 .append(" ")
-                .append(height);
+                .append(height.evaluate());
 
         if (properties.containsKey(ColorProp.TOKEN_NAME)) {
             ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
 
-            sb.append("style=\"").append(color.evaluate()).append("\"");
+            sb.append(" style=\"").append(color.evaluate()).append("\"");
         }
 
         sb.append("/>\n");
