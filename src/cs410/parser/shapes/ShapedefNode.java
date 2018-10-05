@@ -7,10 +7,9 @@ import cs410.parser.properties.PropertyNode;
 import java.util.*;
 
 public abstract class ShapedefNode extends Node {
-    protected String name;
-
     // Override in subclass
     protected Set<String> supportedProps = new HashSet<>();
+    protected Set<String> requiredProps = new HashSet<>();
 
     public Map<String, PropertyNode> properties;
 
@@ -20,11 +19,10 @@ public abstract class ShapedefNode extends Node {
 
     @Override
     public void parse() {
-        String nextToken = lexer.peek();
-        while (!Parser.supportedShapes.contains(nextToken)) {
+        while (!Parser.supportedShapes.contains(lexer.peek())) {
             PropertyNode prop = propNodeFromToken(lexer.getNext());
             prop.parse();
-            this.properties.put(prop.name, prop);
+            this.properties.put(prop.name(), prop);
         }
     }
 
@@ -32,9 +30,18 @@ public abstract class ShapedefNode extends Node {
         if (!this.supportedProps.contains(token)) {
             System.out.println("Unsupported property "
                     + token.replace(":", "")
-                    + " for shape " + this.name);
+                    + " for shape " + this.name());
         }
         // TODO: switch on token parameter and return the correct implementation
         return null;
+    }
+
+    protected void verifyRequiredProps() {
+        if (!properties.keySet().containsAll(requiredProps)) {
+            // ok to mutate since we exit here with an error
+            requiredProps.removeAll(properties.keySet());
+            System.out.println("Missing one or more properties for " + this.name() + ": " + properties.keySet().toString());
+            System.exit(1);
+        }
     }
 }

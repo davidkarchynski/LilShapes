@@ -14,6 +14,12 @@ public class ProgramNode extends Node {
     }
 
     @Override
+    public String name() {
+        // Not used
+        return "";
+    }
+
+    @Override
     public void parse() {
         while (!lexer.empty()) {
             String nextToken = lexer.peek();

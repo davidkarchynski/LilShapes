@@ -28,8 +28,10 @@ public class Lexer {
             input = input.replace(literal,"_"+literal+"_");
         }
 
+        //FIXME: replace with one regexp for performance
         input = input.replace(" ","");
         input = input.replace(",","");
+        input = input.replace(":", "");
         input = input.replaceAll("__","_");
 
         this.tokens = new ArrayList<>(Arrays.asList(input.split("_")));
