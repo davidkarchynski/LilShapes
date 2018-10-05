@@ -29,10 +29,25 @@ public class RectShapedef extends ShapedefNode {
         // Make sure we have all the required properties
         this.verifyRequiredProps();
 
-        HeightProp height = (HeightProp) this.properties.get("height");
-        WidthProp width;
-        PositionProp pos;
-        ColorProp color;
-        return null;
+        HeightProp height = (HeightProp) this.properties.get(HeightProp.TOKEN_NAME);
+        WidthProp width = (WidthProp) this.properties.get(WidthProp.TOKEN_NAME);
+        PositionProp pos = (PositionProp) this.properties.get(PositionProp.TOKEN_NAME);
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<rect ").append(pos.evaluate())
+                .append(" ")
+                .append(width)
+                .append(" ")
+                .append(height);
+
+        if (properties.containsKey(ColorProp.TOKEN_NAME)) {
+            ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
+
+            sb.append("style=\"").append(color.evaluate()).append("\"");
+        }
+
+        sb.append("/>\n");
+        return sb.toString();
     }
 }
