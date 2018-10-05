@@ -1,5 +1,6 @@
 package cs410.parser.shapes;
 
+import cs410.Lexer;
 import cs410.parser.properties.*;
 
 import java.util.Arrays;
@@ -19,7 +20,8 @@ public class RectShapedef extends ShapedefNode {
         super.parse();
     }
 
-    public RectShapedef() {
+    public RectShapedef(Lexer lexer) {
+        super(lexer);
         this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "pos", "color"));
         this.requiredProps = new HashSet<>(Arrays.asList("width", "height", "pos"));
     }

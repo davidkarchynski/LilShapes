@@ -1,5 +1,6 @@
 package cs410.parser;
 
+import cs410.Lexer;
 import cs410.parser.shapes.RectShapedef;
 import cs410.parser.shapes.ShapedefNode;
 
@@ -9,7 +10,8 @@ public class ProgramNode extends Node {
 
     ArrayList<ShapedefNode> shapes;
 
-    public ProgramNode() {
+    public ProgramNode(Lexer lexer) {
+        this.lexer = lexer;
         this.shapes = new ArrayList<ShapedefNode>();
     }
 
@@ -22,18 +24,19 @@ public class ProgramNode extends Node {
     @Override
     public void parse() {
         while (!lexer.empty()) {
-            String nextToken = lexer.peek();
+            String nextToken = lexer.getNext();
             // FIXME: fix this to be generic, support rect for now
-            ShapedefNode shape = new RectShapedef();
+            ShapedefNode shape = new RectShapedef(lexer);
             // TODO: add all supported shapes
             switch (nextToken) {
                 case "circle":
                 case "rectangle":
-                    shape = new RectShapedef();
+                    shape = new RectShapedef(lexer);
+                    break;
                 case "ellipse":
                 case "line":
                 default:
-                    System.out.println("Unsupported token: " + nextToken);
+                    System.out.println("Expected a shape definition, got: " + nextToken);
                     System.exit(1);
             }
             shape.parse();
@@ -46,7 +49,7 @@ public class ProgramNode extends Node {
         StringBuilder sb = new StringBuilder();
 
         for (ShapedefNode s : this.shapes) {
-            sb.append(s.evaluate()).append("\n");
+            sb.append(s.evaluate());
         }
 
         return sb.toString();

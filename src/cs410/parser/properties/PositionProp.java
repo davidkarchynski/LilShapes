@@ -1,10 +1,16 @@
 package cs410.parser.properties;
 
+import cs410.Lexer;
+
 public class PositionProp extends PropertyNode {
     public static final String TOKEN_NAME = "pos";
 
     double x;
     double y;
+
+    public PositionProp(Lexer lexer) {
+        super(lexer);
+    }
 
     @Override
     public String name() {

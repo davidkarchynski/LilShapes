@@ -1,9 +1,15 @@
 package cs410.parser.properties;
 
+import cs410.Lexer;
+
 public class WidthProp extends PropertyNode {
 
     public static final String TOKEN_NAME = "width";
     double value;
+
+    public WidthProp(Lexer lexer) {
+        super(lexer);
+    }
 
     @Override
     public String name() {

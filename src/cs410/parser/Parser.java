@@ -15,6 +15,8 @@ public class Parser {
     }
 
     public void parse() {
-
+        ProgramNode pn = new ProgramNode(lexer);
+        pn.parse();
+        System.out.println(pn.evaluate());
     }
 }

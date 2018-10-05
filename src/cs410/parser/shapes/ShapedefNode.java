@@ -1,5 +1,6 @@
 package cs410.parser.shapes;
 
+import cs410.Lexer;
 import cs410.parser.Node;
 import cs410.parser.Parser;
 import cs410.parser.properties.PropertyNode;
@@ -13,7 +14,8 @@ public abstract class ShapedefNode extends Node {
 
     public Map<String, PropertyNode> properties;
 
-    public ShapedefNode() {
+    public ShapedefNode(Lexer lexer) {
+        this.lexer = lexer;
         this.properties = new HashMap<>();
     }
 
