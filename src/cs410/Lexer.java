@@ -19,7 +19,7 @@ public class Lexer {
         this.readLiteralsFile(litFilename);
         String input = Util.readFile(sourceFilename);
 
-        input = input.replace("\n","");
+        input = input.replace("\n","").replace("\r","");
         input = input.replaceAll("(\\d+(?:\\.\\d+)?)","_$1_");
 
         for (String literal : literals) {
@@ -38,7 +38,7 @@ public class Lexer {
 
     private void readLiteralsFile(String filename) {
         String literalsString = Util.readFile(filename);
-        literalsString = literalsString.replace("\n", "");
+        literalsString = literalsString.replace("\n","").replace("\r","");
 
         this.literals = new ArrayList<>(Arrays.asList(literalsString.split(",")));
     }
