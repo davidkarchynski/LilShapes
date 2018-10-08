@@ -1,4 +1,4 @@
-package cs410.parser.properties;
+package cs410.parser.properties.twoValue;
 
 import cs410.Lexer;
 
@@ -9,6 +9,6 @@ public class CirclePositionProp extends PositionProp {
 
     @Override
     public String evaluate() {
-        return String.format("cx=\"%s\" cy=\"%s\"", Double.toString(x), Double.toString(y));
+        return String.format("cx=\"%s\" cy=\"%s\"", Double.toString(first), Double.toString(second));
     }
 }

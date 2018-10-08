@@ -3,7 +3,12 @@ package cs410.parser.shapes;
 import cs410.Lexer;
 import cs410.parser.Node;
 import cs410.parser.Parser;
-import cs410.parser.properties.*;
+import cs410.parser.properties.singleValue.HeightProp;
+import cs410.parser.properties.singleValue.RadiusProp;
+import cs410.parser.properties.singleValue.WidthProp;
+import cs410.parser.properties.stringValue.ColorProp;
+import cs410.parser.properties.twoValue.CirclePositionProp;
+import cs410.parser.properties.twoValue.PositionProp;
 
 import java.util.*;
 
@@ -12,10 +17,10 @@ public abstract class ShapedefNode extends Node {
     protected Set<String> supportedProps = new HashSet<>();
     protected Set<String> requiredProps = new HashSet<>();
 
-    public Map<String, PropertyNode> properties;
+    public Map<String, Node> properties;
 
     public ShapedefNode(Lexer lexer) {
-        this.lexer = lexer;
+        super(lexer);
         this.properties = new HashMap<>();
     }
 
@@ -28,13 +33,13 @@ public abstract class ShapedefNode extends Node {
                 break;
             }
 
-            PropertyNode prop = propNodeFromToken(token);
+            Node prop = propNodeFromToken(token);
             prop.parse();
             this.properties.put(prop.name(), prop);
         }
     }
 
-    private PropertyNode propNodeFromToken(String token) {
+    private Node propNodeFromToken(String token) {
         if (!this.supportedProps.contains(token)) {
             System.out.println("Unsupported property "
                     + token.replace(":", "")

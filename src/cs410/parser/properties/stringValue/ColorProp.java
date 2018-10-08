@@ -1,10 +1,10 @@
-package cs410.parser.properties;
+package cs410.parser.properties.stringValue;
 
 import cs410.Lexer;
+import cs410.parser.properties.singleValue.SingleValuePropNode;
 
-public class ColorProp extends PropertyNode {
+public class ColorProp extends StringValuePropNode {
     public static final String TOKEN_NAME = "color";
-    String value;
 
     public ColorProp(Lexer lexer) {
         super(lexer);
@@ -16,12 +16,7 @@ public class ColorProp extends PropertyNode {
     }
 
     @Override
-    public void parse() {
-        this.value = lexer.getNext();
-    }
-
-    @Override
     public String evaluate() {
-        return String.format("fill:%s;", value);
+        return String.format("fill:%s;", this.value);
     }
 }

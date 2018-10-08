@@ -2,7 +2,9 @@ package cs410.parser.shapes;
 
 
 import cs410.Lexer;
-import cs410.parser.properties.*;
+import cs410.parser.properties.singleValue.RadiusProp;
+import cs410.parser.properties.stringValue.ColorProp;
+import cs410.parser.properties.twoValue.PositionProp;
 
 import java.util.Arrays;
 import java.util.HashSet;

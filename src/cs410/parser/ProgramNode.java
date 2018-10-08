@@ -12,7 +12,7 @@ public class ProgramNode extends Node {
     ArrayList<ShapedefNode> shapes;
 
     public ProgramNode(Lexer lexer) {
-        this.lexer = lexer;
+        super(lexer);
         this.shapes = new ArrayList<ShapedefNode>();
     }
 
