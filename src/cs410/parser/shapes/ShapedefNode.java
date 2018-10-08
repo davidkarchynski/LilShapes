@@ -9,6 +9,7 @@ import cs410.parser.properties.singleValue.WidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
 import cs410.parser.properties.twoValue.CirclePositionProp;
 import cs410.parser.properties.twoValue.PositionProp;
+import cs410.parser.properties.twoValue.VertexProp;
 
 import java.util.*;
 
@@ -60,6 +61,10 @@ public abstract class ShapedefNode extends Node {
                 return new PositionProp(lexer);
             case RadiusProp.TOKEN_NAME:
                 return new RadiusProp(lexer);
+            case VertexProp.TOKEN_NAME_V1:
+            case VertexProp.TOKEN_NAME_V2:
+            case VertexProp.TOKEN_NAME_V3:
+                return new VertexProp(lexer, token);
             default:
                 System.out.println("Could not parse property: " + token);
                 System.exit(1);
