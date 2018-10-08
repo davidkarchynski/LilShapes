@@ -1,6 +1,7 @@
 package cs410.parser;
 
 import cs410.Lexer;
+import cs410.parser.shapes.CircleShapedef;
 import cs410.parser.shapes.RectShapedef;
 import cs410.parser.shapes.ShapedefNode;
 
@@ -30,6 +31,8 @@ public class ProgramNode extends Node {
             // TODO: add all supported shapes
             switch (nextToken) {
                 case "circle":
+                    shape = new CircleShapedef(lexer);
+                    break;
                 case "rectangle":
                     shape = new RectShapedef(lexer);
                     break;

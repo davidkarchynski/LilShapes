@@ -49,7 +49,12 @@ public abstract class ShapedefNode extends Node {
             case HeightProp.TOKEN_NAME:
                 return new HeightProp(lexer);
             case PositionProp.TOKEN_NAME:
+                if (this.name().equals(CircleShapedef.TOKEN_NAME)) {
+                    return new CirclePositionProp(lexer);
+                }
                 return new PositionProp(lexer);
+            case RadiusProp.TOKEN_NAME:
+                return new RadiusProp(lexer);
             default:
                 System.out.println("Could not parse property: " + token);
                 System.exit(1);
