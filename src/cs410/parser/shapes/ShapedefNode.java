@@ -34,7 +34,7 @@ public abstract class ShapedefNode extends Node {
             System.exit(1);
         }
         this.symbolName = symbolName;
-        while (!Parser.supportedShapes.contains(lexer.peek())) {
+        while (!Parser.supportedShapes.contains(lexer.peek()) && !lexer.empty()) {
             String token = lexer.getNext();
 
             if (token.equals(Lexer.NULL_TOKEN)) {

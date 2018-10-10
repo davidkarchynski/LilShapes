@@ -52,9 +52,9 @@ public class ProgramNode extends Node {
     public String evaluate() {
         StringBuilder sb = new StringBuilder();
 
-        for (ShapedefNode s : this.shapes) {
-            sb.append(s.evaluate());
-        }
+//        for (ShapedefNode s : this.shapes) {
+//            sb.append(s.evaluate());
+//        }
 
         return sb.toString();
     }
