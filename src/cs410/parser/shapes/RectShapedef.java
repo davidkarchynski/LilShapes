@@ -20,8 +20,8 @@ public class RectShapedef extends ShapedefNode {
 
     public RectShapedef(Lexer lexer) {
         super(lexer);
-        this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "pos", "color"));
-        this.requiredProps = new HashSet<>(Arrays.asList("width", "height", "pos"));
+        this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "color"));
+        this.requiredProps = new HashSet<>(Arrays.asList("width", "height"));
     }
 
     @Override

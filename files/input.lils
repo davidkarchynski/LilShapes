@@ -1,15 +1,8 @@
 rectangle "r1"
-pos: 5.5, 6
 color: red
 height: 25
 width: 49.5
 
-circle
-pos: 100, 120
+circle "circle1"
 radius: 75.25
 color: blue
-
-triangle
-vertex1: 60, 60
-vertex2: 60, 90
-vertex3: 90, 90

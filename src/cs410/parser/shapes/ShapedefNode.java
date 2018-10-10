@@ -17,6 +17,7 @@ public abstract class ShapedefNode extends Node {
     // Override in subclass
     protected Set<String> supportedProps = new HashSet<>();
     protected Set<String> requiredProps = new HashSet<>();
+    protected String symbolName;
 
     public Map<String, Node> properties;
 
@@ -27,6 +28,12 @@ public abstract class ShapedefNode extends Node {
 
     @Override
     public void parse() {
+        String symbolName = lexer.getNext();
+        if (!symbolName.matches("\\\"([^\\\"]*)\\\"")) {
+            System.out.println("Expected a name for a shape (ex. \"shapename\"), got " + symbolName);
+            System.exit(1);
+        }
+        this.symbolName = symbolName;
         while (!Parser.supportedShapes.contains(lexer.peek())) {
             String token = lexer.getNext();
 

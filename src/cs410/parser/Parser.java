@@ -1,15 +1,15 @@
 package cs410.parser;
 
 import cs410.Lexer;
+import cs410.parser.shapes.ShapedefNode;
 import cs410.util.Util;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Parser {
-    public static Set<String> supportedShapes = new HashSet<>(Arrays.asList("circle", "rectangle", "line", "ellipse", "triangle"));
+    public static Set<String> supportedShapes = new HashSet<>(Arrays.asList("circle", "rectangle", "line", "ellipse"));
+    public static Map<String, ShapedefNode> symbolTable = new HashMap<>();
 
     private Lexer lexer;
     private String templateFilename;

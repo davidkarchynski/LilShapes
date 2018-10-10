@@ -38,8 +38,9 @@ public class ProgramNode extends Node {
                     break;
                 case "ellipse":
                 case "line":
+                case "draw":
                 default:
-                    System.out.println("Expected a shape definition, got: " + nextToken);
+                    System.out.println("Expected a shape definition or draw expression, got: " + nextToken);
                     System.exit(1);
             }
             shape.parse();
