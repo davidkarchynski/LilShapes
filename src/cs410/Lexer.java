@@ -19,12 +19,15 @@ public class Lexer {
         this.readLiteralsFile(litFilename);
         String input = Util.readFile(sourceFilename);
 
+
+        input = input.replaceAll("(?<!\\w)(\\d+(?:\\.\\d+)?)","_$1_");
         input = input.replace("\n","").replace("\r","");
-        input = input.replaceAll("(\\d+(?:\\.\\d+)?)","_$1_");
 
         for (String literal : literals) {
             input = input.replace(literal,"_"+literal+"_");
         }
+
+        System.out.println(input);
 
         //FIXME: replace with one regexp for performance
         input = input.replace(" ","");

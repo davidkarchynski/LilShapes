@@ -18,11 +18,6 @@ public class RectShapedef extends ShapedefNode {
         return RectShapedef.TOKEN_NAME;
     }
 
-    @Override
-    public void parse() {
-        super.parse();
-    }
-
     public RectShapedef(Lexer lexer) {
         super(lexer);
         this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "pos", "color"));

@@ -3,16 +3,13 @@ package cs410.parser;
 import cs410.Lexer;
 import cs410.util.Util;
 
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Parser {
-    public static Set<String> supportedShapes = new HashSet<>(Arrays.asList("circle", "rectangle", "line", "ellipse"));
+    public static Set<String> supportedShapes = new HashSet<>(Arrays.asList("circle", "rectangle", "line", "ellipse", "triangle"));
 
     private Lexer lexer;
     private String templateFilename;
