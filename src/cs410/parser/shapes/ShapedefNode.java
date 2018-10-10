@@ -34,7 +34,8 @@ public abstract class ShapedefNode extends Node {
             System.exit(1);
         }
         this.symbolName = symbolName;
-        while (!Parser.supportedShapes.contains(lexer.peek()) && !lexer.empty()) {
+        // FIXME: handle this properly
+        while (!Parser.supportedShapes.contains(lexer.peek()) && !lexer.empty() && !lexer.peek().equals("draw")) {
             String token = lexer.getNext();
 
             if (token.equals(Lexer.NULL_TOKEN)) {
@@ -45,6 +46,8 @@ public abstract class ShapedefNode extends Node {
             prop.parse();
             this.properties.put(prop.name(), prop);
         }
+
+        Parser.symbolTable.put(this.symbolName.substring(1, this.symbolName.length() - 1), this);
     }
 
     private Node propNodeFromToken(String token) {

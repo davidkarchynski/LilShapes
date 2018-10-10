@@ -31,11 +31,10 @@ public class RectShapedef extends ShapedefNode {
 
         HeightProp height = (HeightProp) this.properties.get(HeightProp.TOKEN_NAME);
         WidthProp width = (WidthProp) this.properties.get(WidthProp.TOKEN_NAME);
-        PositionProp pos = (PositionProp) this.properties.get(PositionProp.TOKEN_NAME);
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<rect ").append(pos.evaluate())
+        sb.append("<rect x=\"%s\" y=\"%s\"")
                 .append(" ")
                 .append(width.evaluate())
                 .append(" ")

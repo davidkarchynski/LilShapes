@@ -3,17 +3,16 @@ package cs410.parser;
 import cs410.Lexer;
 import cs410.parser.shapes.CircleShapedef;
 import cs410.parser.shapes.RectShapedef;
-import cs410.parser.shapes.ShapedefNode;
 
 import java.util.ArrayList;
 
 public class ProgramNode extends Node {
 
-    ArrayList<ShapedefNode> shapes;
+    ArrayList<Node> drawProcs;
 
     public ProgramNode(Lexer lexer) {
         super(lexer);
-        this.shapes = new ArrayList<ShapedefNode>();
+        this.drawProcs = new ArrayList<>();
     }
 
     @Override
@@ -26,25 +25,27 @@ public class ProgramNode extends Node {
     public void parse() {
         while (!lexer.empty()) {
             String nextToken = lexer.getNext();
-            // FIXME: fix this to be generic, support rect for now
-            ShapedefNode shape = new RectShapedef(lexer);
+            // FIXME: handle this properly
+            Node node = null;
             // TODO: add all supported shapes
             switch (nextToken) {
                 case "circle":
-                    shape = new CircleShapedef(lexer);
+                    node = new CircleShapedef(lexer);
                     break;
                 case "rectangle":
-                    shape = new RectShapedef(lexer);
+                    node = new RectShapedef(lexer);
                     break;
                 case "ellipse":
                 case "line":
                 case "draw":
+                    node = new DrawProcNode(lexer);
+                    this.drawProcs.add(node);
+                    break;
                 default:
                     System.out.println("Expected a shape definition or draw expression, got: " + nextToken);
                     System.exit(1);
             }
-            shape.parse();
-            this.shapes.add(shape);
+            node.parse();
         }
     }
 
@@ -52,9 +53,9 @@ public class ProgramNode extends Node {
     public String evaluate() {
         StringBuilder sb = new StringBuilder();
 
-//        for (ShapedefNode s : this.shapes) {
-//            sb.append(s.evaluate());
-//        }
+        for (Node drawProc : this.drawProcs) {
+            sb.append(drawProc.evaluate());
+        }
 
         return sb.toString();
     }
