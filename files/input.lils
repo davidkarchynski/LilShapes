@@ -7,29 +7,65 @@ circle "circle1"
 radius: 22.26
 color: purple
 
+
 ellipse "elName"
-width: 25
-height: 10
-color: yellow
+width: 100
+height: 60
+color: light green
+
+ellipse "ee1"
+width: 50
+height: 50
+color: black
+
+ellipse "ee2"
+width: 20
+height: 20
+color: light green
 
 line "lineTest"
-color: green
-
-draw r1 at 20, 20
-draw r1 at 50, 50
-draw r1 at 100, 120
-
-draw circle1 at 75, 75
-
-draw elName at 200, 220
+color: blue
 
 path "p1"
 color: blue
 move: 100, 0
-move: -50, 50
-move: -25, -10
+move: 100, 500
+move: -50 , 50
 
-draw lineTest from 0, 0 to 300, 300
-draw lineTest from 0, 300 to 300, 0
+path "t1"
+color: black
+move: -300,500
+move: 600,0
 
-draw p1 at 90, 350
+path "t2"
+color: light green
+move: -330,540
+move: 660,0
+
+path "t3"
+color: green
+move: -330,540
+move: -50,-50
+
+rectangle "aa"
+width: 800
+height: 20
+color: white
+
+
+draw t2 at 500,5
+
+draw t1 at 500,30
+
+draw elName at 500,200
+
+draw ee1 at 500,200
+
+draw ee2 at 525,175
+
+draw t3 at 500,5
+
+
+
+
+
