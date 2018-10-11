@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Parser {
-    public static Set<String> supportedShapes = new HashSet<>(Arrays.asList("circle", "rectangle", "line", "ellipse"));
+    public static Set<String> supportedShapes = new HashSet<>(Arrays.asList("circle", "rectangle", "line", "ellipse", "path"));
     public static Map<String, ShapedefNode> symbolTable = new HashMap<>();
 
     private Lexer lexer;

@@ -23,5 +23,12 @@ draw circle1 at 75, 75
 
 draw elName at 200, 220
 
+path "p1"
+color: blue
+move: 100, 0
+move: -50, 50
+
 draw lineTest from 0, 0 to 300, 300
 draw lineTest from 0, 300 to 300, 0
+
+draw p1 at 90, 300

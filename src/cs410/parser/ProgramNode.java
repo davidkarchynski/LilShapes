@@ -1,10 +1,7 @@
 package cs410.parser;
 
 import cs410.Lexer;
-import cs410.parser.shapes.CircleShapedef;
-import cs410.parser.shapes.EllipseShapedef;
-import cs410.parser.shapes.LineShapedef;
-import cs410.parser.shapes.RectShapedef;
+import cs410.parser.shapes.*;
 
 import java.util.ArrayList;
 
@@ -42,6 +39,9 @@ public class ProgramNode extends Node {
                     break;
                 case "line":
                     node = new LineShapedef(lexer);
+                    break;
+                case "path":
+                    node = new PathDef(lexer);
                     break;
                 case "draw":
                     node = new DrawProcNode(lexer);

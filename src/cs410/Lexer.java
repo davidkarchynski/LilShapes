@@ -20,14 +20,21 @@ public class Lexer {
         String input = Util.readFile(sourceFilename);
 
 
-        input = input.replaceAll("(?<!\\w)(\\d+(?:\\.\\d+)?)","_$1_");
+        input = input.replaceAll("(?<!\\w)((-+)?\\d+(?:\\.\\d+)?)","_$1_");
         input = input.replace("\n","").replace("\r","");
 
         for (String literal : literals) {
+            // FIXME: hacky way to fix "at" literal interfering with "path" literal, handle this properly
+            if (literal.equals("path ")) {
+                input = input.replace(literal,"_P!A!T!H_");
+                continue;
+            }
             input = input.replace(literal,"_"+literal+"_");
         }
 
         System.out.println(input);
+
+        input = input.replace("P!A!T!H","path");
 
         //FIXME: replace with one regexp for performance
         input = input.replace(" ","");

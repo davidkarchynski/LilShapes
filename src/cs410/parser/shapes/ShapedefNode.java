@@ -8,6 +8,7 @@ import cs410.parser.properties.singleValue.RadiusProp;
 import cs410.parser.properties.singleValue.WidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
 import cs410.parser.properties.twoValue.CirclePositionProp;
+import cs410.parser.properties.twoValue.MoveProp;
 import cs410.parser.properties.twoValue.PositionProp;
 
 import java.util.HashMap;
@@ -41,21 +42,22 @@ public abstract class ShapedefNode extends Node {
             if (lexer.peek().equals(Lexer.NULL_TOKEN)) {
                 break;
             }
-            this.parseProperty();
+            Node prop = this.parseProperty();
+            this.properties.put(prop.name(), prop);
         }
 
         Parser.symbolTable.put(this.symbolName.substring(1, this.symbolName.length() - 1), this);
     }
 
-    protected void parseProperty() {
+    protected Node parseProperty() {
         String token = lexer.getNext();
 
         Node prop = propNodeFromToken(token);
         prop.parse();
-        this.properties.put(prop.name(), prop);
+        return prop;
     }
 
-    private Node propNodeFromToken(String token) {
+    protected Node propNodeFromToken(String token) {
         if (!this.supportedProps.contains(token)) {
             System.out.println("Unsupported property "
                     + token.replace(":", "")
@@ -76,6 +78,8 @@ public abstract class ShapedefNode extends Node {
                 return new PositionProp(lexer);
             case RadiusProp.TOKEN_NAME:
                 return new RadiusProp(lexer);
+            case MoveProp.TOKEN_NAME:
+                return new MoveProp(lexer);
             default:
                 System.out.println("Could not parse property: " + token);
                 System.exit(1);
