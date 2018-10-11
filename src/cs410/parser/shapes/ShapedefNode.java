@@ -10,7 +10,10 @@ import cs410.parser.properties.stringValue.ColorProp;
 import cs410.parser.properties.twoValue.CirclePositionProp;
 import cs410.parser.properties.twoValue.PositionProp;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class ShapedefNode extends Node {
     // Override in subclass

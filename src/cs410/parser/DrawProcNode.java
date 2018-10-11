@@ -61,6 +61,8 @@ public class DrawProcNode extends Node {
                     y2 = Double.parseDouble(lexer.getNext());
                     posArgs.add(x2);
                     posArgs.add(y2);
+
+                    break;
                 } catch (NumberFormatException nfe) {
                     System.out.println("Error parsing position argument for \"draw\"");
                     System.exit(1);

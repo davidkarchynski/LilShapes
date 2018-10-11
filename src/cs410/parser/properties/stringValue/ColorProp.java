@@ -1,7 +1,6 @@
 package cs410.parser.properties.stringValue;
 
 import cs410.Lexer;
-import cs410.parser.properties.singleValue.SingleValuePropNode;
 
 public class ColorProp extends StringValuePropNode {
     public static final String TOKEN_NAME = "color";
@@ -17,6 +16,6 @@ public class ColorProp extends StringValuePropNode {
 
     @Override
     public String evaluate() {
-        return String.format("fill:%s;", this.value);
+        return this.value;
     }
 }

@@ -4,7 +4,6 @@ import cs410.Lexer;
 import cs410.parser.properties.singleValue.HeightProp;
 import cs410.parser.properties.singleValue.WidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
-import cs410.parser.properties.twoValue.PositionProp;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,7 +41,7 @@ public class RectShapedef extends ShapedefNode {
         if (properties.containsKey(ColorProp.TOKEN_NAME)) {
             ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
 
-            sb.append(" style=\"").append(color.evaluate()).append("\"");
+            sb.append(" style=\"fill:").append(color.evaluate()).append("\"");
         }
 
         sb.append("/>\n");

@@ -41,7 +41,7 @@ public class CircleShapedef extends ShapedefNode {
         if (properties.containsKey(ColorProp.TOKEN_NAME)) {
             ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
 
-            sb.append(" style=\"").append(color.evaluate()).append("\"");
+            sb.append(" style=\"fill:").append(color.evaluate()).append("\"");
         }
 
         sb.append("/>\n");
