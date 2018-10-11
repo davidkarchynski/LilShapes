@@ -34,7 +34,7 @@ public class LineShapedef extends ShapedefNode {
 
         sb.append("<line x1=\"%s\" y1=\"%s\" x2=\"%s\" y2=\"%s\"")
                 .append(" ")
-                .append(" style=\"stroke:")
+                .append("style=\"stroke:")
                 .append(color.evaluate())
                 .append(";")
                 .append("stroke-width:2")

@@ -38,18 +38,21 @@ public abstract class ShapedefNode extends Node {
         this.symbolName = symbolName;
         // FIXME: handle this properly
         while (!Parser.supportedShapes.contains(lexer.peek()) && !lexer.empty() && !lexer.peek().equals("draw")) {
-            String token = lexer.getNext();
-
-            if (token.equals(Lexer.NULL_TOKEN)) {
+            if (lexer.peek().equals(Lexer.NULL_TOKEN)) {
                 break;
             }
-
-            Node prop = propNodeFromToken(token);
-            prop.parse();
-            this.properties.put(prop.name(), prop);
+            this.parseProperty();
         }
 
         Parser.symbolTable.put(this.symbolName.substring(1, this.symbolName.length() - 1), this);
+    }
+
+    protected void parseProperty() {
+        String token = lexer.getNext();
+
+        Node prop = propNodeFromToken(token);
+        prop.parse();
+        this.properties.put(prop.name(), prop);
     }
 
     private Node propNodeFromToken(String token) {
