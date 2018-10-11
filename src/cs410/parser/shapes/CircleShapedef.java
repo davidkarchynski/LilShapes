@@ -14,8 +14,8 @@ public class CircleShapedef extends ShapedefNode {
 
     public CircleShapedef(Lexer lexer) {
         super(lexer);
-        this.supportedProps = new HashSet<>(Arrays.asList("radius", "pos", "color"));
-        this.requiredProps = new HashSet<>(Arrays.asList("pos", "radius"));
+        this.supportedProps = new HashSet<>(Arrays.asList("radius", "color"));
+        this.requiredProps = new HashSet<>(Arrays.asList("radius"));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class CircleShapedef extends ShapedefNode {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<circle ").append(pos.evaluate())
+        sb.append("<circle cx=%s cy=%s")
                 .append(" ")
                 .append(radius.evaluate());
 

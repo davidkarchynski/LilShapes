@@ -86,7 +86,6 @@ public class DrawProcNode extends Node {
             stringArgs.add(Double.toString(posArg));
         }
 
-        // fixme: figure out why passing an array fails
-        return String.format(shapeNode.evaluate(), stringArgs.get(0), stringArgs.get(1));
+        return String.format(shapeNode.evaluate(), stringArgs.toArray());
     }
 }

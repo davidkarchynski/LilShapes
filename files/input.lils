@@ -1,8 +1,14 @@
 rectangle "r1"
-color: blue
+color: red
 height: 25
 width: 49.5
+
+circle "circle1"
+radius: 22.26
+color: pink
 
 draw r1 at 20, 20
 draw r1 at 50, 50
 draw r1 at 100, 120
+
+draw circle1 at 75, 75
