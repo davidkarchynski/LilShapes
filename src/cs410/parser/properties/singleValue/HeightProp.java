@@ -16,6 +16,6 @@ public class HeightProp extends SingleValuePropNode {
 
     @Override
     public String evaluate() {
-        return String.format("height=\"%s\"", Double.toString(value));
+        return Double.toString(value);
     }
 }

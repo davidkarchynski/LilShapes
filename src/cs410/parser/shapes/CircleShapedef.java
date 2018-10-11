@@ -33,7 +33,7 @@ public class CircleShapedef extends ShapedefNode {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<circle cx=%s cy=%s")
+        sb.append("<circle cx=\"%s\" cy=\"%s\"")
                 .append(" ")
                 .append(radius.evaluate());
 

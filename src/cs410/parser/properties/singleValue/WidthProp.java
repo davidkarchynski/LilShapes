@@ -17,6 +17,6 @@ public class WidthProp extends SingleValuePropNode {
 
     @Override
     public String evaluate() {
-        return String.format("width=\"%s\"", Double.toString(value));
+        return Double.toString(value);
     }
 }

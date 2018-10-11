@@ -1,14 +1,21 @@
 rectangle "r1"
-color: red
+color: brown
 height: 25
 width: 49.5
 
 circle "circle1"
 radius: 22.26
-color: pink
+color: purple
+
+ellipse "elName"
+width: 25
+height: 10
+color: yellow
 
 draw r1 at 20, 20
 draw r1 at 50, 50
 draw r1 at 100, 120
 
 draw circle1 at 75, 75
+
+draw elName at 200, 220
