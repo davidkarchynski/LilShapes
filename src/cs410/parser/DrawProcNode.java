@@ -119,6 +119,10 @@ public class DrawProcNode extends Node {
                 .append(shapeNode.debugInfo())
                 .append(" ")
                 .append(shapeName)
+                .append(" at ")
+                .append(x)
+                .append(" , ")
+                .append(y)
                 .append("</text>");
 
         return sb.toString();

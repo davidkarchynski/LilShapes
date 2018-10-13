@@ -1,8 +1,9 @@
 circle "circle1"
 radius: 100
-color: purple
-lineWidth: 50
+color: transparent
+lineWidth: 5
 lineColor: black
 
 
 draw circle1 at 300, 300
+draw circle1 at 300, 400
