@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class EllipseShapedef extends ShapedefNode {
-    public static final String TOKEN_NAME = "ellipse";
 
     public EllipseShapedef(Lexer lexer) {
         super(lexer);
+        this.TOKEN_NAME = "ellipse";
         this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "color", "lineColor", "lineWidth"));
         this.requiredProps = new HashSet<>(Arrays.asList("width", "height"));
     }

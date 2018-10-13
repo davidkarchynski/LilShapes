@@ -22,4 +22,9 @@ abstract public class TwoValuePropNode extends Node {
             Main.errorsList.add("Error parsing value for " + this.name());
         }
     }
+
+    @Override
+    public String debugInfo() {
+        return "";
+    }
 }

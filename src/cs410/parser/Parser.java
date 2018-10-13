@@ -28,6 +28,10 @@ public class Parser {
         pn.parse();
 
         String output = pn.evaluate();
+        if (isDebugMode) {
+            String debugInfo = pn.debugInfo();
+            output = output + " \n" + debugInfo;
+        }
         String template = Util.readFile(this.templateFilename);
 
         // TODO: extract the tag into a static constant?

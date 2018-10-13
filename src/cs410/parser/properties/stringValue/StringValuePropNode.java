@@ -14,4 +14,9 @@ abstract public class StringValuePropNode extends Node {
     public void parse() {
         this.value = lexer.getNext();
     }
+
+    @Override
+    public String debugInfo() {
+        return "";
+    }
 }

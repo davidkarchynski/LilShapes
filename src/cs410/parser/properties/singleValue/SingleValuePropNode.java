@@ -22,4 +22,9 @@ public abstract class SingleValuePropNode extends Node {
             Main.errorsList.add("Error parsing " + token + " for " + this.name());
         }
     }
+
+    @Override
+    public String debugInfo() {
+        return "";
+    }
 }

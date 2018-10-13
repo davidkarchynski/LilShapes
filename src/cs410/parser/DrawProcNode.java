@@ -1,6 +1,7 @@
 package cs410.parser;
 
 import cs410.Lexer;
+import cs410.Main;
 import cs410.parser.shapes.ShapedefNode;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class DrawProcNode extends Node {
                     posArgs.add(y1);
                 } catch (NumberFormatException nfe) {
                     System.out.println("Error parsing position argument for \"draw\"");
+                    Main.errorsList.add("Error parsing position argument for \"draw\"");
                     System.exit(1);
                 }
                 break;
@@ -54,6 +56,7 @@ public class DrawProcNode extends Node {
 
                     if(!to.equals("to")) {
                         System.out.println("\"draw from X1, Y1\" must be followed by \"to X2, Y2\"");
+                        Main.errorsList.add("\"draw from X1, Y1\" must be followed by \"to X2, Y2\"");
                         System.exit(1);
                     }
 
@@ -65,11 +68,13 @@ public class DrawProcNode extends Node {
                     break;
                 } catch (NumberFormatException nfe) {
                     System.out.println("Error parsing position argument for \"draw\"");
+                    Main.errorsList.add("Error parsing position argument for \"draw\"");
                     System.exit(1);
                 }
                 break;
             default:
                 System.out.println("\"draw\" call must be followed by a shape name and one of the following: \"from\", \"at\"");
+                Main.errorsList.add("\"draw\" call must be followed by a shape name and one of the following: \"from\", \"at\"");
                 System.exit(1);
         }
     }
@@ -78,6 +83,7 @@ public class DrawProcNode extends Node {
     public String evaluate() {
         ShapedefNode shapeNode = Parser.symbolTable.get(this.shapeName);
         if (shapeNode == null) {
+            Main.errorsList.add(this.shapeName + " is not defined.");
             System.out.println(this.shapeName + " is not defined.");
             System.exit(1);
         }
@@ -89,5 +95,32 @@ public class DrawProcNode extends Node {
         }
 
         return String.format(shapeNode.evaluate(), stringArgs.toArray());
+    }
+
+    @Override
+    public String debugInfo() {
+        ShapedefNode shapeNode = Parser.symbolTable.get(this.shapeName);
+
+        String x = Double.toString(this.posArgs.get(0));
+        String y = Double.toString(this.posArgs.get(1));
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<text fill=\"red\" ") // TODO: input the color and the size from the front end
+                .append("font-size=\"15\" ")
+                .append("font-family=\"\'Comic Sans MS\', cursive, sans-serif\" ")
+                .append("x=\"")
+                .append(x)
+                .append("\" ")
+                .append("y=\"")
+                .append(y)
+                .append("\"")
+                .append(">")
+                .append(shapeNode.debugInfo())
+                .append(" ")
+                .append(shapeName)
+                .append("</text>");
+
+        return sb.toString();
     }
 }

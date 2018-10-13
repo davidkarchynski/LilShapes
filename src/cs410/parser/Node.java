@@ -12,4 +12,5 @@ public abstract class Node {
     abstract public String name();
     abstract public void parse();
     abstract public String evaluate();
+    abstract public String debugInfo();
 }

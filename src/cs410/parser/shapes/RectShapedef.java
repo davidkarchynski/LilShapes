@@ -12,8 +12,6 @@ import java.util.HashSet;
 
 public class RectShapedef extends ShapedefNode {
 
-    public static final String TOKEN_NAME = "rectangle";
-
     @Override
     public String name() {
         return RectShapedef.TOKEN_NAME;
@@ -21,6 +19,7 @@ public class RectShapedef extends ShapedefNode {
 
     public RectShapedef(Lexer lexer) {
         super(lexer);
+        this.TOKEN_NAME = "rectangle";
         this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "color", "lineColor", "lineWidth"));
         this.requiredProps = new HashSet<>(Arrays.asList("width", "height"));
     }

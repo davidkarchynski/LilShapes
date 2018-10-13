@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class CircleShapedef extends ShapedefNode {
-    public static final String TOKEN_NAME = "circle";
 
     public CircleShapedef(Lexer lexer) {
         super(lexer);
+        this.TOKEN_NAME = "circle";
         this.supportedProps = new HashSet<>(Arrays.asList("radius", "color", "lineColor", "lineWidth"));
         this.requiredProps = new HashSet<>(Arrays.asList("radius"));
     }

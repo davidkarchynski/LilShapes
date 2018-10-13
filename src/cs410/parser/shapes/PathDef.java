@@ -13,12 +13,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class PathDef extends ShapedefNode {
-    public static final String TOKEN_NAME = "path";
 
     private ArrayList<Node> moves = new ArrayList<>();
 
     public PathDef(Lexer lexer) {
         super(lexer);
+        this.TOKEN_NAME = "path";
         this.supportedProps = new HashSet<>(Arrays.asList("move", "color", "lineColor", "lineWidth"));
         this.requiredProps = new HashSet<>(Arrays.asList("move", "color"));
     }

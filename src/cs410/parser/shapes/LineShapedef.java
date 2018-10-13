@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class LineShapedef extends ShapedefNode {
-    public static final String TOKEN_NAME = "line";
 
     public LineShapedef(Lexer lexer) {
         super(lexer);
+        this.TOKEN_NAME = "line";
         this.supportedProps = new HashSet<>(Arrays.asList("lineColor", "lineWidth"));
         this.requiredProps = new HashSet<>(Arrays.asList("lineColor"));
     }

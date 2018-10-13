@@ -25,6 +25,8 @@ public abstract class ShapedefNode extends Node {
     protected Set<String> requiredProps = new HashSet<>();
     protected String symbolName;
 
+    public static String TOKEN_NAME = "";
+
     public Map<String, Node> properties;
 
     public ShapedefNode(Lexer lexer) {
@@ -107,5 +109,10 @@ public abstract class ShapedefNode extends Node {
             System.out.println("Missing one or more properties for " + this.name() + ": " + properties.keySet().toString());
             System.exit(1);
         }
+    }
+
+    @Override
+    public String debugInfo() {
+        return this.TOKEN_NAME;
     }
 }

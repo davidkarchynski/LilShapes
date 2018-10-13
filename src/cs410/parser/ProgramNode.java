@@ -65,4 +65,15 @@ public class ProgramNode extends Node {
 
         return sb.toString();
     }
+
+    @Override
+    public String debugInfo() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Node drawProc : this.drawProcs) {
+            sb.append(drawProc.debugInfo());
+        }
+
+        return sb.toString();
+    }
 }
