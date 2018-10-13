@@ -1,7 +1,8 @@
+// test comment
 circle "circle1"
 radius: 100
-color: transparent
-lineWidth: 5
+
+lineWidth: 5 //color: transparent
 lineColor: black
 
 

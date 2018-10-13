@@ -3,6 +3,8 @@ package cs410;
 import cs410.util.Util;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lexer {
     public static final String NULL_TOKEN = "NULL";
@@ -21,6 +23,7 @@ public class Lexer {
 
 
         input = input.replaceAll("(?<!\\w)((-+)?\\d+(?:\\.\\d+)?)","_$1_");
+        input = removeAllComments(input);
         input = input.replace("\n","").replace("\r","");
 
         for (String literal : literals) {
@@ -44,7 +47,6 @@ public class Lexer {
 
         this.tokens = new ArrayList<>(Arrays.asList(input.split("_")));
         this.tokens.remove(0);
-        removeCommentsFromTokens();
     }
 
     private void removeCommentsFromTokens() {
@@ -60,6 +62,13 @@ public class Lexer {
             i++;
         }
         tokens.removeAll(comments);
+    }
+
+    private String removeAllComments(String input) {
+        List<String> lines = new ArrayList<String>(Arrays.asList(input.split("\n")));
+
+        return lines.stream().map(line -> line.contains("//") ?
+                line.substring(0, line.indexOf("//")) : line).collect(Collectors.joining("\n"));
     }
 
     private void readLiteralsFile(String filename) {
