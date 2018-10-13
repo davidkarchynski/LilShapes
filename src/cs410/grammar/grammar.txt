@@ -1,7 +1,7 @@
 PROGRAM     := SHAPEDEC*
 SHAPEDEC    := SHAPE PROPERTY*
 SHAPE       := "ellipse" | "circle" | "rectangle" | "line"
-PROPERTY    := POSITION | WIDTH | HEIGHT | RADIUS | TO | FROM | COLOR
+PROPERTY    := POSITION | WIDTH | HEIGHT | RADIUS | TO | FROM | COLOR | LINECOLOR
 POSITION    := "pos:" VALUE, VALUE
 WIDTH       := "width:" VALUE
 HEIGHT      := "height:" VALUE

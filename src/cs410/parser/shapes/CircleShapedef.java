@@ -4,6 +4,7 @@ package cs410.parser.shapes;
 import cs410.Lexer;
 import cs410.parser.properties.singleValue.RadiusProp;
 import cs410.parser.properties.stringValue.ColorProp;
+import cs410.parser.properties.stringValue.LineColorProp;
 import cs410.parser.properties.twoValue.PositionProp;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class CircleShapedef extends ShapedefNode {
 
     public CircleShapedef(Lexer lexer) {
         super(lexer);
-        this.supportedProps = new HashSet<>(Arrays.asList("radius", "color"));
+        this.supportedProps = new HashSet<>(Arrays.asList("radius", "color", "lineColor"));
         this.requiredProps = new HashSet<>(Arrays.asList("radius"));
     }
 
@@ -38,11 +39,20 @@ public class CircleShapedef extends ShapedefNode {
                 .append(radius.evaluate());
 
         // Optional properties
+        String evaluatedFill = "";
         if (properties.containsKey(ColorProp.TOKEN_NAME)) {
             ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
 
-            sb.append(" style=\"fill:").append(color.evaluate()).append("\"");
+            evaluatedFill += "fill:" + color.evaluate() + "; ";
         }
+
+        if (properties.containsKey(LineColorProp.TOKEN_NAME)) {
+            LineColorProp lineColor = (LineColorProp) this.properties.get(LineColorProp.TOKEN_NAME);
+
+            evaluatedFill += "stroke:" + lineColor.evaluate() + "; ";
+        }
+
+        sb.append(" style=\"").append(evaluatedFill).append("\"");
 
         sb.append("/>\n");
         return sb.toString();

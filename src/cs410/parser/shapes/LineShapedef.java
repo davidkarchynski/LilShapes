@@ -5,6 +5,7 @@ import cs410.Lexer;
 import cs410.parser.properties.singleValue.HeightProp;
 import cs410.parser.properties.singleValue.WidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
+import cs410.parser.properties.stringValue.LineColorProp;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,8 +15,8 @@ public class LineShapedef extends ShapedefNode {
 
     public LineShapedef(Lexer lexer) {
         super(lexer);
-        this.supportedProps = new HashSet<>(Arrays.asList("color"));
-        this.requiredProps = new HashSet<>(Arrays.asList("color"));
+        this.supportedProps = new HashSet<>(Arrays.asList("lineColor"));
+        this.requiredProps = new HashSet<>(Arrays.asList("lineColor"));
     }
 
     @Override
@@ -30,12 +31,12 @@ public class LineShapedef extends ShapedefNode {
 
         StringBuilder sb = new StringBuilder();
 
-        ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
+        LineColorProp lineColor = (LineColorProp) this.properties.get(LineColorProp.TOKEN_NAME);
 
         sb.append("<line x1=\"%s\" y1=\"%s\" x2=\"%s\" y2=\"%s\"")
                 .append(" ")
                 .append("style=\"stroke:")
-                .append(color.evaluate())
+                .append(lineColor.evaluate())
                 .append(";")
                 .append("stroke-width:2")
                 .append("\"/>\n");

@@ -5,6 +5,7 @@ height: 25
 width: 49.5
 
 circle "circle1"
+lineColor: blue
 radius: 22.26
 color: purple
 
@@ -25,7 +26,7 @@ height: 20
 color: light green
 
 line "lineTest"
-color: blue
+lineColor: blue
 
 path "p1"
 color: blue
@@ -65,8 +66,5 @@ draw ee1 at 500,200
 draw ee2 at 525,175
 
 draw t3 at 500,5
-
-
-
 
 

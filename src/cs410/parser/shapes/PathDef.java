@@ -4,6 +4,7 @@ package cs410.parser.shapes;
 import cs410.Lexer;
 import cs410.parser.Node;
 import cs410.parser.properties.stringValue.ColorProp;
+import cs410.parser.properties.stringValue.LineColorProp;
 import cs410.parser.properties.twoValue.MoveProp;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class PathDef extends ShapedefNode {
 
     public PathDef(Lexer lexer) {
         super(lexer);
-        this.supportedProps = new HashSet<>(Arrays.asList("move", "color"));
+        this.supportedProps = new HashSet<>(Arrays.asList("move", "color", "lineColor"));
         this.requiredProps = new HashSet<>(Arrays.asList("move", "color"));
     }
 
@@ -46,6 +47,14 @@ public class PathDef extends ShapedefNode {
 
         ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
 
+        String evaluatedLineColor = "";
+        if (properties.containsKey(LineColorProp.TOKEN_NAME)) {
+            LineColorProp lineColor = (LineColorProp) this.properties.get(LineColorProp.TOKEN_NAME);
+
+            evaluatedLineColor = lineColor.evaluate();
+        }
+
+
         sb.append("<path d=\"M%s %s")
                 .append(" ");
 
@@ -59,7 +68,10 @@ public class PathDef extends ShapedefNode {
                 .append(" ")
                 .append("fill=\"")
                 .append(color.evaluate())
-                .append("\"")
+                .append("\" ")
+                .append("stroke=\"")
+                .append(evaluatedLineColor)
+                .append("\" ")
                 .append("/>\n");
 
         return sb.toString();

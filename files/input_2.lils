@@ -1,0 +1,24 @@
+// This is rectangle
+rectangle "r1"
+color: brown
+lineColor: red
+height: 25
+width: 49.5
+
+draw r1 at 500,5
+
+path "p1"
+color: blue
+move: 100, 0
+move: 100, 500
+move: -50 , 50
+
+draw p1 at 10,10
+
+
+line "l1"
+lineColor: red
+
+draw l1 from 100, 100 to 200, 200
+
+
