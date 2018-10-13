@@ -1,3 +1,4 @@
+// This is rectangle
 rectangle "r1"
 color: brown
 height: 25
@@ -16,7 +17,7 @@ color: light green
 ellipse "ee1"
 width: 50
 height: 50
-color: black
+color: black // we can write the colors names or use RGB
 
 ellipse "ee2"
 width: 20

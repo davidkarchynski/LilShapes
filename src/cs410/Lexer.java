@@ -44,6 +44,22 @@ public class Lexer {
 
         this.tokens = new ArrayList<>(Arrays.asList(input.split("_")));
         this.tokens.remove(0);
+        removeCommentsFromTokens();
+    }
+
+    private void removeCommentsFromTokens() {
+        ArrayList<String> comments = new ArrayList<>();
+        int i = 0;
+
+        for (String t: tokens) {
+            if (t.length() > 1 && t.substring(0,2).equals("//")) {
+                comments.add(t);
+            } else if (t.contains("//")){
+                tokens.set(i, t.substring(0, t.indexOf("//")));
+            }
+            i++;
+        }
+        tokens.removeAll(comments);
     }
 
     private void readLiteralsFile(String filename) {
