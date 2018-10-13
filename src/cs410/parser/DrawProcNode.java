@@ -107,8 +107,9 @@ public class DrawProcNode extends Node {
         StringBuilder sb = new StringBuilder();
 
         sb.append("<text fill=\"red\" ") // TODO: input the color and the size from the front end
-                .append("font-size=\"15\" ")
-                .append("font-family=\"\'Comic Sans MS\', cursive, sans-serif\" ")
+                .append("font-size=\"12\" ")
+                .append("font-family=\" \'Courier New\', Courier, \'Lucida Sans Typewriter\' \" ")
+                .append("font-weight:bold; ")
                 .append("x=\"")
                 .append(x)
                 .append("\" ")
@@ -118,7 +119,7 @@ public class DrawProcNode extends Node {
                 .append(">")
                 .append(shapeNode.debugInfo())
                 .append(" ")
-                .append(shapeName)
+                .append(this.shapeName)
                 .append(" at ")
                 .append(x)
                 .append(" , ")

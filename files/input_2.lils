@@ -1,10 +1,10 @@
-// test comment
-circle "circle1"
+// a medium sized transparent circle
+circle "myCircle"
 radius: 100
-
-lineWidth: 5 //color: transparent
+color: transparent
+lineWidth: 5
 lineColor: black
 
 
-draw circle1 at 300, 300
-draw circle1 at 300, 400
+draw myCircle at 300, 300
+draw myCircle at 300, 400
