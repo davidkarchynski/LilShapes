@@ -3,6 +3,7 @@ package cs410.parser.shapes;
 
 import cs410.Lexer;
 import cs410.parser.properties.singleValue.HeightProp;
+import cs410.parser.properties.singleValue.LineWidthProp;
 import cs410.parser.properties.singleValue.WidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
 import cs410.parser.properties.stringValue.LineColorProp;
@@ -15,7 +16,7 @@ public class EllipseShapedef extends ShapedefNode {
 
     public EllipseShapedef(Lexer lexer) {
         super(lexer);
-        this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "color", "lineColor"));
+        this.supportedProps = new HashSet<>(Arrays.asList("width", "height", "color", "lineColor", "lineWidth"));
         this.requiredProps = new HashSet<>(Arrays.asList("width", "height"));
     }
 
@@ -51,6 +52,12 @@ public class EllipseShapedef extends ShapedefNode {
             LineColorProp lineColor = (LineColorProp) this.properties.get(LineColorProp.TOKEN_NAME);
 
             evaluatedFill += "stroke:" + lineColor.evaluate() + "; ";
+        }
+
+        if (properties.containsKey(LineWidthProp.TOKEN_NAME)) {
+            LineWidthProp lineWidth = (LineWidthProp) this.properties.get(LineWidthProp.TOKEN_NAME);
+
+            evaluatedFill += "stroke-width:" + lineWidth.evaluate() + "; ";
         }
 
         sb.append(" style=\"").append(evaluatedFill).append("\"");

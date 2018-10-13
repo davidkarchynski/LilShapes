@@ -3,6 +3,7 @@ package cs410.parser.shapes;
 
 import cs410.Lexer;
 import cs410.parser.Node;
+import cs410.parser.properties.singleValue.LineWidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
 import cs410.parser.properties.stringValue.LineColorProp;
 import cs410.parser.properties.twoValue.MoveProp;
@@ -18,7 +19,7 @@ public class PathDef extends ShapedefNode {
 
     public PathDef(Lexer lexer) {
         super(lexer);
-        this.supportedProps = new HashSet<>(Arrays.asList("move", "color", "lineColor"));
+        this.supportedProps = new HashSet<>(Arrays.asList("move", "color", "lineColor", "lineWidth"));
         this.requiredProps = new HashSet<>(Arrays.asList("move", "color"));
     }
 
@@ -47,13 +48,21 @@ public class PathDef extends ShapedefNode {
 
         ColorProp color = (ColorProp) this.properties.get(ColorProp.TOKEN_NAME);
 
+        // Optional properties
         String evaluatedLineColor = "";
+        String evaluatedLineWidth = "";
         if (properties.containsKey(LineColorProp.TOKEN_NAME)) {
             LineColorProp lineColor = (LineColorProp) this.properties.get(LineColorProp.TOKEN_NAME);
 
             evaluatedLineColor = lineColor.evaluate();
         }
 
+        if (properties.containsKey(LineWidthProp.TOKEN_NAME)) {
+            LineWidthProp lineWidth = (LineWidthProp) this.properties.get(LineWidthProp.TOKEN_NAME);
+
+            evaluatedLineWidth = lineWidth.evaluate();
+
+        }
 
         sb.append("<path d=\"M%s %s")
                 .append(" ");
@@ -71,6 +80,9 @@ public class PathDef extends ShapedefNode {
                 .append("\" ")
                 .append("stroke=\"")
                 .append(evaluatedLineColor)
+                .append("\" ")
+                .append("stroke-width=\"")
+                .append(evaluatedLineWidth)
                 .append("\" ")
                 .append("/>\n");
 

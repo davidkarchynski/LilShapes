@@ -4,6 +4,7 @@ import cs410.Lexer;
 import cs410.parser.Node;
 import cs410.parser.Parser;
 import cs410.parser.properties.singleValue.HeightProp;
+import cs410.parser.properties.singleValue.LineWidthProp;
 import cs410.parser.properties.singleValue.RadiusProp;
 import cs410.parser.properties.singleValue.WidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
@@ -74,6 +75,8 @@ public abstract class ShapedefNode extends Node {
                 return new HeightProp(lexer);
             case LineColorProp.TOKEN_NAME:
                 return new LineColorProp(lexer);
+            case LineWidthProp.TOKEN_NAME:
+                return new LineWidthProp(lexer);
             case PositionProp.TOKEN_NAME:
                 if (this.name().equals(CircleShapedef.TOKEN_NAME)) {
                     return new CirclePositionProp(lexer);

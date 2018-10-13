@@ -13,5 +13,6 @@ to,
 from,
 draw ,
 at,
-lineColor:
+lineColor:,
+lineWidth:
 
