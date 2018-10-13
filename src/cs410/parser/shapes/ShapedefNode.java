@@ -1,6 +1,7 @@
 package cs410.parser.shapes;
 
 import cs410.Lexer;
+import cs410.Main;
 import cs410.parser.Node;
 import cs410.parser.Parser;
 import cs410.parser.properties.singleValue.HeightProp;
@@ -35,6 +36,7 @@ public abstract class ShapedefNode extends Node {
     public void parse() {
         String symbolName = lexer.getNext();
         if (!symbolName.matches("\\\"([^\\\"]*)\\\"")) {
+            Main.errorsList.add("Expected a name for a shape (ex. \"shapename\"), got " + symbolName);
             System.out.println("Expected a name for a shape (ex. \"shapename\"), got " + symbolName);
             System.exit(1);
         }
@@ -61,6 +63,9 @@ public abstract class ShapedefNode extends Node {
 
     protected Node propNodeFromToken(String token) {
         if (!this.supportedProps.contains(token)) {
+            Main.errorsList.add("Unsupported property "
+                    + token.replace(":", "")
+                    + " for shape " + this.name());
             System.out.println("Unsupported property "
                     + token.replace(":", "")
                     + " for shape " + this.name());
@@ -87,6 +92,7 @@ public abstract class ShapedefNode extends Node {
             case MoveProp.TOKEN_NAME:
                 return new MoveProp(lexer);
             default:
+                Main.errorsList.add("Could not parse property: " + token);
                 System.out.println("Could not parse property: " + token);
                 System.exit(1);
         }
@@ -97,6 +103,7 @@ public abstract class ShapedefNode extends Node {
         if (!properties.keySet().containsAll(requiredProps)) {
             // ok to mutate since we exit here with an error
             requiredProps.removeAll(properties.keySet());
+            Main.errorsList.add("Missing one or more properties for " + this.name() + ": " + properties.keySet().toString());
             System.out.println("Missing one or more properties for " + this.name() + ": " + properties.keySet().toString());
             System.exit(1);
         }

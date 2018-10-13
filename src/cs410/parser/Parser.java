@@ -14,11 +14,13 @@ public class Parser {
     private Lexer lexer;
     private String templateFilename;
     private String outputFilename;
+    private boolean isDebugMode;
 
-    public Parser(Lexer lexer, String templateFilename, String outputFilename) {
+    public Parser(Lexer lexer, String templateFilename, String outputFilename, boolean isDebugMode) {
         this.lexer = lexer;
         this.templateFilename = templateFilename;
         this.outputFilename = outputFilename;
+        this.isDebugMode = isDebugMode;
     }
 
     public void parse() {

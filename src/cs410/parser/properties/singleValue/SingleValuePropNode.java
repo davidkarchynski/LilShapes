@@ -1,6 +1,7 @@
 package cs410.parser.properties.singleValue;
 
 import cs410.Lexer;
+import cs410.Main;
 import cs410.parser.Node;
 
 public abstract class SingleValuePropNode extends Node {
@@ -18,6 +19,7 @@ public abstract class SingleValuePropNode extends Node {
             value = Double.parseDouble(token);
         } catch (NumberFormatException nfe) {
             System.out.println("Error parsing " + token + " for " + this.name());
+            Main.errorsList.add("Error parsing " + token + " for " + this.name());
         }
     }
 }
