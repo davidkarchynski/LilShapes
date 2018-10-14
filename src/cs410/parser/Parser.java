@@ -34,4 +34,8 @@ public class Parser {
 
         return output;
     }
+
+    public int getLine() {
+        return this.lexer.getLine();
+    }
 }

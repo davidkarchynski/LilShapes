@@ -13,6 +13,7 @@ public class Lexer {
     private ArrayList<String> tokens;
     private final ArrayList<String> literals = new ArrayList<String>(Arrays.asList("circle ", "rectangle ", "ellipse ", "line ", "path ", "pos:", "width:", "height:", "radius:", "color:", "move:", "to", "from", "draw ", "at", "lineColor:", "lineWidth:"));
     private String code;
+    private int line = 1;
 
     public Lexer(String codeInput) {
         this.tokens = new ArrayList<>();
@@ -25,7 +26,8 @@ public class Lexer {
 
         input = input.replaceAll("(?<!\\w)((-+)?\\d+(?:\\.\\d+)?)","_$1_");
         input = removeAllComments(input);
-        input = input.replace("\n","").replace("\r","");
+        input = input.replace("\r","");
+        input = input.replace("\n", "_\n_");
 
         for (String literal : literals) {
             // FIXME: hacky way to fix "at" literal interfering with "path" literal, handle this properly
@@ -56,6 +58,12 @@ public class Lexer {
     }
 
     public String peek() {
+        if (this.tokens.get(0).equals("\n")) {
+            while (!this.empty() && this.tokens.get(0).equals("\n")) {
+                tokens.remove(0);
+                this.line++;
+            }
+        }
         if (!this.empty()) {
             return tokens.get(0);
         }
@@ -68,20 +76,23 @@ public class Lexer {
     }
 
     public String getNext() {
+        if (this.tokens.get(0).equals("\n")) {
+            while (!this.empty() && this.tokens.get(0).equals("\n")) {
+                tokens.remove(0);
+                this.line++;
+            }
+        }
         if (!this.empty()) {
             return tokens.remove(0);
         }
         return Lexer.NULL_TOKEN;
     }
 
-    public String getNext(String regexp) throws ParseErrorException {
-        if (!checkToken(regexp)) {
-            throw new ParseErrorException("Failed to parse at token: " + this.peek());
-        }
-        return this.getNext();
-    }
-
     public boolean empty() {
         return this.tokens.size() == 0;
+    }
+
+    public int getLine() {
+        return line;
     }
 }

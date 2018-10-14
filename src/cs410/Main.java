@@ -12,7 +12,7 @@ public class Main {
         try {
             System.out.println(parser.parse());
         } catch (ParseErrorException e) {
-            System.out.println(e.getMessage());
+            System.out.println(parser.getLine() + e.getMessage());
         }
     }
 }
