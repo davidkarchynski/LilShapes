@@ -49,8 +49,7 @@ public class ProgramNode extends Node {
                     this.drawProcs.add(node);
                     break;
                 default:
-                    System.out.println("Expected a shape definition or draw expression, got: " + nextToken);
-                    System.exit(1);
+                    throw new ParseErrorException("Expected a shape definition or draw expression, got: " + nextToken);
             }
             node.parse();
         }
