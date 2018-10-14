@@ -1,7 +1,6 @@
 package cs410.parser.shapes;
 
 import cs410.Lexer;
-import cs410.Main;
 import cs410.parser.Node;
 import cs410.parser.Parser;
 import cs410.parser.properties.singleValue.HeightProp;
@@ -13,6 +12,7 @@ import cs410.parser.properties.stringValue.LineColorProp;
 import cs410.parser.properties.twoValue.CirclePositionProp;
 import cs410.parser.properties.twoValue.MoveProp;
 import cs410.parser.properties.twoValue.PositionProp;
+import cs410.util.ParseErrorException;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,12 +35,10 @@ public abstract class ShapedefNode extends Node {
     }
 
     @Override
-    public void parse() {
+    public void parse() throws ParseErrorException {
         String symbolName = lexer.getNext();
         if (!symbolName.matches("\\\"([^\\\"]*)\\\"")) {
-            Main.errorsList.add("Expected a name for a shape (ex. \"shapename\"), got " + symbolName);
-            System.out.println("Expected a name for a shape (ex. \"shapename\"), got " + symbolName);
-            System.exit(1);
+            throw new ParseErrorException("Expected a name for a shape (ex. \"shapename\"), got " + symbolName);
         }
         this.symbolName = symbolName;
         // FIXME: handle this properly
@@ -55,7 +53,7 @@ public abstract class ShapedefNode extends Node {
         Parser.symbolTable.put(this.symbolName.substring(1, this.symbolName.length() - 1), this);
     }
 
-    protected Node parseProperty() {
+    protected Node parseProperty() throws ParseErrorException {
         String token = lexer.getNext();
 
         Node prop = propNodeFromToken(token);
@@ -63,12 +61,9 @@ public abstract class ShapedefNode extends Node {
         return prop;
     }
 
-    protected Node propNodeFromToken(String token) {
+    protected Node propNodeFromToken(String token) throws ParseErrorException {
         if (!this.supportedProps.contains(token)) {
-            Main.errorsList.add("Unsupported property "
-                    + token.replace(":", "")
-                    + " for shape " + this.name());
-            System.out.println("Unsupported property "
+            throw new ParseErrorException("Unsupported property "
                     + token.replace(":", "")
                     + " for shape " + this.name());
         }
@@ -94,20 +89,15 @@ public abstract class ShapedefNode extends Node {
             case MoveProp.TOKEN_NAME:
                 return new MoveProp(lexer);
             default:
-                Main.errorsList.add("Could not parse property: " + token);
-                System.out.println("Could not parse property: " + token);
-                System.exit(1);
+                throw new ParseErrorException("Could not parse property: " + token);
         }
-        return null;
     }
 
-    protected void verifyRequiredProps() {
+    protected void verifyRequiredProps() throws ParseErrorException {
         if (!properties.keySet().containsAll(requiredProps)) {
             // ok to mutate since we exit here with an error
             requiredProps.removeAll(properties.keySet());
-            Main.errorsList.add("Missing one or more properties for " + this.name() + ": " + properties.keySet().toString());
-            System.out.println("Missing one or more properties for " + this.name() + ": " + properties.keySet().toString());
-            System.exit(1);
+            throw new ParseErrorException("Missing one or more properties for " + this.name() + ": " + properties.keySet().toString());
         }
     }
 

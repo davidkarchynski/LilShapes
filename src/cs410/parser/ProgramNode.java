@@ -2,6 +2,7 @@ package cs410.parser;
 
 import cs410.Lexer;
 import cs410.parser.shapes.*;
+import cs410.util.ParseErrorException;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class ProgramNode extends Node {
     }
 
     @Override
-    public void parse() {
+    public void parse() throws ParseErrorException {
         while (!lexer.empty()) {
             String nextToken = lexer.getNext();
             // FIXME: handle this properly
@@ -56,7 +57,7 @@ public class ProgramNode extends Node {
     }
 
     @Override
-    public String evaluate() {
+    public String evaluate() throws ParseErrorException {
         StringBuilder sb = new StringBuilder();
 
         for (Node drawProc : this.drawProcs) {

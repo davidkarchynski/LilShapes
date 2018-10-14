@@ -1,5 +1,6 @@
 package cs410;
 
+import cs410.util.ParseErrorException;
 import cs410.util.Util;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,17 +11,17 @@ public class Lexer {
     public static final String NULL_TOKEN = "NULL";
 
     private ArrayList<String> tokens;
-    private ArrayList<String> literals;
+    private final ArrayList<String> literals = new ArrayList<String>(Arrays.asList("circle ", "rectangle ", "ellipse ", "line ", "path ", "pos:", "width:", "height:", "radius:", "color:", "move:", "to", "from", "draw ", "at", "lineColor:", "lineWidth:"));
+    private String code;
 
-    public Lexer() {
-        tokens = new ArrayList<>();
-        literals = new ArrayList<>();
+    public Lexer(String codeInput) {
+        this.tokens = new ArrayList<>();
+
+        this.code = codeInput;
     }
 
-    public void tokenize(String sourceFilename, String litFilename) {
-        this.readLiteralsFile(litFilename);
-        String input = Util.readFile(sourceFilename);
-
+    public void tokenize() {
+        String input = this.code;
 
         input = input.replaceAll("(?<!\\w)((-+)?\\d+(?:\\.\\d+)?)","_$1_");
         input = removeAllComments(input);
@@ -35,8 +36,6 @@ public class Lexer {
             input = input.replace(literal,"_"+literal+"_");
         }
 
-        System.out.println(input);
-
         input = input.replace("P!A!T!H","path");
 
         //FIXME: replace with one regexp for performance
@@ -49,33 +48,11 @@ public class Lexer {
         this.tokens.remove(0);
     }
 
-    private void removeCommentsFromTokens() {
-        ArrayList<String> comments = new ArrayList<>();
-        int i = 0;
-
-        for (String t: tokens) {
-            if (t.length() > 1 && t.substring(0,2).equals("//")) {
-                comments.add(t);
-            } else if (t.contains("//")){
-                tokens.set(i, t.substring(0, t.indexOf("//")));
-            }
-            i++;
-        }
-        tokens.removeAll(comments);
-    }
-
     private String removeAllComments(String input) {
         List<String> lines = new ArrayList<String>(Arrays.asList(input.split("\n")));
 
         return lines.stream().map(line -> line.contains("//") ?
                 line.substring(0, line.indexOf("//")) : line).collect(Collectors.joining("\n"));
-    }
-
-    private void readLiteralsFile(String filename) {
-        String literalsString = Util.readFile(filename);
-        literalsString = literalsString.replace("\n","").replace("\r","");
-
-        this.literals = new ArrayList<>(Arrays.asList(literalsString.split(",")));
     }
 
     public String peek() {
@@ -97,19 +74,14 @@ public class Lexer {
         return Lexer.NULL_TOKEN;
     }
 
-    public String getNext(String regexp) {
+    public String getNext(String regexp) throws ParseErrorException {
         if (!checkToken(regexp)) {
-            System.out.println("Failed to parse at token: " + this.peek());
-            System.exit(1);
+            throw new ParseErrorException("Failed to parse at token: " + this.peek());
         }
         return this.getNext();
     }
 
     public boolean empty() {
         return this.tokens.size() == 0;
-    }
-
-    public void printTokens() {
-        System.out.println(this.tokens.toString());
     }
 }

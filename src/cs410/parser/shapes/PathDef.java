@@ -7,6 +7,7 @@ import cs410.parser.properties.singleValue.LineWidthProp;
 import cs410.parser.properties.stringValue.ColorProp;
 import cs410.parser.properties.stringValue.LineColorProp;
 import cs410.parser.properties.twoValue.MoveProp;
+import cs410.util.ParseErrorException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public class PathDef extends ShapedefNode {
     }
 
     @Override
-    protected Node parseProperty() {
+    protected Node parseProperty() throws ParseErrorException {
         Node prop = super.parseProperty();
 
         if (prop.name().equals(MoveProp.TOKEN_NAME)) {
@@ -40,7 +41,7 @@ public class PathDef extends ShapedefNode {
     }
 
     @Override
-    public String evaluate() {
+    public String evaluate() throws ParseErrorException {
         // Make sure we have all the required properties
         this.verifyRequiredProps();
 

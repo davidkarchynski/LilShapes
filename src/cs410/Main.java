@@ -1,20 +1,18 @@
 package cs410;
 
 import cs410.parser.Parser;
-
-import java.util.ArrayList;
-import java.util.List;
+import cs410.util.ParseErrorException;
+import cs410.util.Util;
 
 public class Main {
-    public static List<String> errorsList = new ArrayList<>();
-
     public static void main(String[] args) {
-        Lexer lexer = new Lexer();
+        String input = Util.readFile("files/input.lils");
+        Parser parser = new Parser(input, true);
 
-        lexer.tokenize("files/input_2.lils", "files/literals.txt");
-        lexer.printTokens();
-
-        Parser parser = new Parser(lexer, "files/html_template.html", "files/output.html", true);
-        parser.parse();
+        try {
+            System.out.println(parser.parse());
+        } catch (ParseErrorException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

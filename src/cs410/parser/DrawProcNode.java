@@ -1,8 +1,8 @@
 package cs410.parser;
 
 import cs410.Lexer;
-import cs410.Main;
 import cs410.parser.shapes.ShapedefNode;
+import cs410.util.ParseErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class DrawProcNode extends Node {
     }
 
     @Override
-    public void parse() {
+    public void parse() throws ParseErrorException {
         this.shapeName = lexer.getNext();
 
         String atFromToken = lexer.getNext();
@@ -40,9 +40,7 @@ public class DrawProcNode extends Node {
                     posArgs.add(x1);
                     posArgs.add(y1);
                 } catch (NumberFormatException nfe) {
-                    System.out.println("Error parsing position argument for \"draw\"");
-                    Main.errorsList.add("Error parsing position argument for \"draw\"");
-                    System.exit(1);
+                    throw new ParseErrorException("Error parsing position argument for \"draw\"");
                 }
                 break;
             case "from":
@@ -55,9 +53,7 @@ public class DrawProcNode extends Node {
                     String to = lexer.getNext();
 
                     if(!to.equals("to")) {
-                        System.out.println("\"draw from X1, Y1\" must be followed by \"to X2, Y2\"");
-                        Main.errorsList.add("\"draw from X1, Y1\" must be followed by \"to X2, Y2\"");
-                        System.exit(1);
+                        throw new ParseErrorException("\"draw from X1, Y1\" must be followed by \"to X2, Y2\"");
                     }
 
                     x2 = Double.parseDouble(lexer.getNext());
@@ -67,25 +63,18 @@ public class DrawProcNode extends Node {
 
                     break;
                 } catch (NumberFormatException nfe) {
-                    System.out.println("Error parsing position argument for \"draw\"");
-                    Main.errorsList.add("Error parsing position argument for \"draw\"");
-                    System.exit(1);
+                    throw new ParseErrorException("Error parsing position argument for \"draw\"");
                 }
-                break;
             default:
-                System.out.println("\"draw\" call must be followed by a shape name and one of the following: \"from\", \"at\"");
-                Main.errorsList.add("\"draw\" call must be followed by a shape name and one of the following: \"from\", \"at\"");
-                System.exit(1);
+                throw new ParseErrorException("\"draw\" call must be followed by a shape name and one of the following: \"from\", \"at\"");
         }
     }
 
     @Override
-    public String evaluate() {
+    public String evaluate() throws ParseErrorException {
         ShapedefNode shapeNode = Parser.symbolTable.get(this.shapeName);
         if (shapeNode == null) {
-            Main.errorsList.add(this.shapeName + " is not defined.");
-            System.out.println(this.shapeName + " is not defined.");
-            System.exit(1);
+            throw new ParseErrorException(this.shapeName + " is not defined.");
         }
 
         ArrayList<String> stringArgs = new ArrayList<>();

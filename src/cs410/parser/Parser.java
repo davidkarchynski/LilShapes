@@ -2,6 +2,7 @@ package cs410.parser;
 
 import cs410.Lexer;
 import cs410.parser.shapes.ShapedefNode;
+import cs410.util.ParseErrorException;
 import cs410.util.Util;
 
 import java.io.PrintWriter;
@@ -12,18 +13,16 @@ public class Parser {
     public static Map<String, ShapedefNode> symbolTable = new HashMap<>();
 
     private Lexer lexer;
-    private String templateFilename;
-    private String outputFilename;
     private boolean isDebugMode;
 
-    public Parser(Lexer lexer, String templateFilename, String outputFilename, boolean isDebugMode) {
-        this.lexer = lexer;
-        this.templateFilename = templateFilename;
-        this.outputFilename = outputFilename;
+    public Parser(String input, boolean isDebugMode) {
+        this.lexer = new Lexer(input);
         this.isDebugMode = isDebugMode;
     }
 
-    public void parse() {
+    public String parse() throws ParseErrorException {
+        lexer.tokenize();
+
         ProgramNode pn = new ProgramNode(lexer);
         pn.parse();
 
@@ -32,17 +31,7 @@ public class Parser {
             String debugInfo = pn.debugInfo();
             output = output + " \n" + debugInfo;
         }
-        String template = Util.readFile(this.templateFilename);
 
-        // TODO: extract the tag into a static constant?
-        template = template.replace("<comp_output/>", output);
-
-        try {
-            PrintWriter writer = new PrintWriter(this.outputFilename, "UTF-8");
-            writer.println(template);
-            writer.close();
-        } catch (Exception e) {
-            System.out.println("Could not write output file");
-        }
+        return output;
     }
 }

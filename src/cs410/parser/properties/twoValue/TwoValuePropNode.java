@@ -3,6 +3,7 @@ package cs410.parser.properties.twoValue;
 import cs410.Lexer;
 import cs410.Main;
 import cs410.parser.Node;
+import cs410.util.ParseErrorException;
 
 abstract public class TwoValuePropNode extends Node {
     protected double first;
@@ -13,13 +14,12 @@ abstract public class TwoValuePropNode extends Node {
     }
 
     @Override
-    public void parse() {
+    public void parse() throws ParseErrorException {
         try {
             first = Double.parseDouble(lexer.getNext());
             second = Double.parseDouble(lexer.getNext());
         } catch (NumberFormatException nfe) {
-            System.out.println("Error parsing value for " + this.name());
-            Main.errorsList.add("Error parsing value for " + this.name());
+            throw new ParseErrorException("Error parsing value for " + this.name());
         }
     }
 

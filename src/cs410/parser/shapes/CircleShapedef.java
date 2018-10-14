@@ -7,6 +7,7 @@ import cs410.parser.properties.singleValue.RadiusProp;
 import cs410.parser.properties.stringValue.ColorProp;
 import cs410.parser.properties.stringValue.LineColorProp;
 import cs410.parser.properties.twoValue.PositionProp;
+import cs410.util.ParseErrorException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class CircleShapedef extends ShapedefNode {
     }
 
     @Override
-    public String evaluate() {
+    public String evaluate() throws ParseErrorException {
         // Make sure we have all the required properties
         this.verifyRequiredProps();
 
