@@ -58,11 +58,9 @@ public class Lexer {
     }
 
     public String peek() {
-        if (this.tokens.get(0).equals("\n")) {
-            while (!this.empty() && this.tokens.get(0).equals("\n")) {
-                tokens.remove(0);
-                this.line++;
-            }
+        while (!this.empty() && this.tokens.get(0).equals("\n")) {
+            tokens.remove(0);
+            this.line++;
         }
         if (!this.empty()) {
             return tokens.get(0);
@@ -76,11 +74,9 @@ public class Lexer {
     }
 
     public String getNext() {
-        if (this.tokens.get(0).equals("\n")) {
-            while (!this.empty() && this.tokens.get(0).equals("\n")) {
-                tokens.remove(0);
-                this.line++;
-            }
+        while (!this.empty() && this.tokens.get(0).equals("\n")) {
+            tokens.remove(0);
+            this.line++;
         }
         if (!this.empty()) {
             return tokens.remove(0);
