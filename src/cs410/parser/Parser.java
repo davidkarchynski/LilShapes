@@ -32,6 +32,7 @@ public class Parser {
             output = output + " \n" + debugInfo;
         }
 
+        Parser.symbolTable = new HashMap<>();
         return output;
     }
 

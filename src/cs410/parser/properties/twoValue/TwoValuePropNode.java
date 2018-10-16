@@ -1,7 +1,6 @@
 package cs410.parser.properties.twoValue;
 
 import cs410.Lexer;
-import cs410.Main;
 import cs410.parser.Node;
 import cs410.util.ParseErrorException;
 
